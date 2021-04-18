@@ -1,0 +1,96 @@
+#!/usr/bin/with-contenv bash
+
+#install hibiuscus as first jameica plugin
+if [[ ! -d "$JAMEICA_DIR" ]]
+then
+        echo "[hibiscus]  not installed..."
+
+        echo "[hibiscus]  ... installing hibiscus. Remark: Hibiscus as well as other jameica plugins should be kept up to date with build-in jameica updater!"
+	mkdir -p $JAMEICA_DIR/plugins
+	wget -q -O $JAMEICA_DIR/tmp.zip  https://www.willuhn.de/products/hibiscus/releases/2.10/hibiscus-2.10.2.zip 
+	unzip $JAMEICA_DIR/tmp.zip -d $JAMEICA_DIR/plugins
+	rm -f $JAMEICA_DIR/tmp.zip
+	chown -R abc:abc $JAMEICA_DIR
+	
+else
+        echo "[hibiscus]  $JAMEICA_DIR is not empty. Skip installing hibiscus."
+fi
+
+if [ "$INSTALL_RUNDUM_SORGLOS" = "yes" ]; then
+	echo "[hibiscus] Try to install RundumSorglos-Paket ..."
+	
+	echo "[hibiscus] ... downloading 'Jameica-Hibiscus_Linux64-Installer.run'"
+	wget -qO $JAMEICA_DIR/Installer.run https://hibiscus-setup.derrichter.de/Jameica-Hibiscus_Linux64-Installer.run
+	chmod +x $JAMEICA_DIR/Installer.run
+	$JAMEICA_DIR/Installer.run --noexec --keep --target $JAMEICA_DIR/tmp
+
+
+	if [[ ! -d "$JAMEICA_DIR/plugins/hibiscus.scripting.htmlunit" ]]
+	then
+		echo "[hibiscus] ... installing HTMLUnit"
+		rm -rf $JAMEICA_DIR/plugins/jameica.scripting
+		rm -rf $JAMEICA_DIR/plugins/jameica.update
+		rm -rf $JAMEICA_DIR/hibiscus.scripting.htmlunit
+		rm -rf $JAMEICA_DIR/plugins/hibiscus.scripting.htmlunit
+		cp -rf $JAMEICA_DIR/tmp/htmlunit/hibiscus.scripting.htmlunit $JAMEICA_DIR/plugins		
+	else
+		echo "[hibiscus] ... skip installing HTMLUnit (already exists)"
+	fi
+	
+	if [[ ! -d "$JAMEICA_DIR/plugins/hibiscus.scripting.selenium" ]]
+	then
+		echo "[hibiscus] ... installing SeleniumHQ"
+		rm -rf $JAMEICA_DIR/hibiscus.scripting.selenium
+		rm -rf $JAMEICA_DIR/plugins/hibiscus.scripting.selenium
+		cp -rf $JAMEICA_DIR/tmp/selenium/hibiscus.scripting.selenium $JAMEICA_DIR/plugins		
+	else
+		echo "[hibiscus] ... skip installing SeleniumHQ (already exists)"
+	fi
+	
+	if [[ ! -d "$JAMEICA_DIR/plugins/hibiscus.scripting.chromedriver" ]]
+	then
+		echo "[hibiscus] ... installing ChromeDriver"
+		rm -rf $JAMEICA_DIR/hibiscus.scripting.chromedriver
+		rm -rf $JAMEICA_DIR/plugins/hibiscus.scripting.chromedriver
+		cp -rf $JAMEICA_DIR/tmp/chromedriver/hibiscus.scripting.chromedriver $JAMEICA_DIR/plugins
+		chmod -R +x $JAMEICA_DIR/plugins/hibiscus.scripting.chromedriver/bin/	
+	else
+		echo "[hibiscus] ... skip installing ChromeDriver (already exists)"
+	fi
+	
+	if [[ ! -d "$JAMEICA_DIR/plugins/hibiscus.scripting.pdfbox" ]]
+	then
+		echo "[hibiscus] ... installing PDFBox"
+		rm -rf $JAMEICA_DIR/hibiscus.scripting.pdfbox
+		rm -rf $JAMEICA_DIR/plugins/hibiscus.scripting.pdfbox
+		cp -rf $JAMEICA_DIR/tmp/pdfbox/hibiscus.scripting.pdfbox $JAMEICA_DIR/plugins
+	else
+		echo "[hibiscus] ... skip installing PDFBox (already exists)"
+	fi
+	
+	if [[ ! -d "$JAMEICA_DIR/plugins/finance.websync" ]]
+	then
+		echo "[hibiscus] ... installing Fincance.Websync"
+		rm -rf $JAMEICA_DIR/plugins/finance.websync
+		cp -rf $JAMEICA_DIR/tmp/finance.websync $JAMEICA_DIR/plugins
+	else
+		echo "[hibiscus] ... skip installing Fincance.Websync (already exists)"
+	fi	
+	
+	if [[ ! -d "$JAMEICA_DIR/plugins/hibiscus.mashup" ]]
+	then
+		echo "[hibiscus] ... installing Hibiscus.Mashup"
+		rm -rf $JAMEICA_DIR/plugins/hibiscus.mashup
+		cp -rf $JAMEICA_DIR/tmp/hibiscus.mashup $JAMEICA_DIR/plugins
+	else
+		echo "[hibiscus] ... skip installing Hibiscus.Mashup (already exists)"
+	fi
+	
+	rm -rf $JAMEICA_DIR/Installer.run
+	rm -rf $JAMEICA_DIR/tmp
+	
+	echo "[hibiscus] ... done. Remark: Hibiscus as well as other jameica plugins should be kept up to date with build-in jameica updater!"
+else
+	echo "[hibiscus] Do not try to install RundumSorglos-Paket."
+fi
+
