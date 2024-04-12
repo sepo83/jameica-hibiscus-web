@@ -10,10 +10,6 @@ ENV APPNAME="hibiscus"
 ENV JAMEICA_DIR="/config/.jameica"
 ENV INSTALL_RUNDUM_SORGLOS='yes'
 
-#ENV CUSTOM_PORT="8080"
-
-https://github.com/willuhn/hibiscus/blob/master/icons/hibiscus-icon-16x16.png
-
 # install jameica dependencies
 RUN \
     echo "**** add icon ****" && \
