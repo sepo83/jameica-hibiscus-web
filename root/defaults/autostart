@@ -1,0 +1,3 @@
+# Execute jameica
+importas JAMEICA_DIR JAMEICA_DIR
+/opt/jameica/jameica.sh --file $JAMEICA_DIR
