@@ -1,4 +1,4 @@
-FROM ghcr.io/linuxserver/baseimage-guacgui
+FROM ghcr.io/linuxserver/baseimage-kasmvnc:debianbookworm
 
 # set version label
 ARG BUILD_DATE
@@ -12,9 +12,34 @@ ENV INSTALL_RUNDUM_SORGLOS='yes'
 
 #ENV CUSTOM_PORT="8080"
 
+https://github.com/willuhn/hibiscus/blob/master/icons/hibiscus-icon-16x16.png
+
 # install jameica dependencies
-RUN apt update && apt dist-upgrade -y && \
+RUN \
+    echo "**** add icon ****" && \
+    curl -o \
+    /kclient/public/icon.png \
+    https://github.com/willuhn/hibiscus/blob/master/icons/hibiscus-icon-16x16.png && \
+    echo "**** install packages ****" && \
+    apt update &&  \
+    DEBIAN_FRONTEND=noninteractive \
     apt install -qy \
+    	firefox-esr \
+    	gstreamer1.0-alsa \
+    	gstreamer1.0-gl \
+    	gstreamer1.0-gtk3 \
+    	gstreamer1.0-libav \
+    	gstreamer1.0-plugins-bad \
+    	gstreamer1.0-plugins-base \
+    	gstreamer1.0-plugins-good \
+    	gstreamer1.0-plugins-ugly \
+    	gstreamer1.0-pulseaudio \
+    	gstreamer1.0-qt5 \
+    	gstreamer1.0-tools \
+	gstreamer1.0-x \
+    	libgstreamer1.0 \
+    	libgstreamer-plugins-bad1.0 \
+     	libgstreamer-plugins-base1.0 \
 	pcscd \
 	openjdk-11-jre \
 	libgtk-3-0 \
