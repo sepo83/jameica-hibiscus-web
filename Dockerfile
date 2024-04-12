@@ -20,9 +20,9 @@ RUN \
     /kclient/public/icon.png \
     https://github.com/willuhn/hibiscus/blob/master/icons/hibiscus-icon-16x16.png && \
     echo "**** install packages ****" && \
-    apt-get update &&  \
+    apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
-    apt-get --no-install-recommends -y \
+    apt-get install --no-install-recommends -y \
     	firefox-esr \
     	gstreamer1.0-alsa \
     	gstreamer1.0-gl \
