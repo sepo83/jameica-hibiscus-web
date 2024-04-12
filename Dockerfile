@@ -10,6 +10,9 @@ ENV APPNAME="hibiscus"
 ENV JAMEICA_DIR="/config/.jameica"
 ENV INSTALL_RUNDUM_SORGLOS='yes'
 
+ENV TITLE=Hibiscus \
+    SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
+
 # install jameica dependencies
 RUN \
     echo "**** add icon ****" && \
@@ -17,9 +20,9 @@ RUN \
     /kclient/public/icon.png \
     https://github.com/willuhn/hibiscus/blob/master/icons/hibiscus-icon-16x16.png && \
     echo "**** install packages ****" && \
-    apt update &&  \
+    apt-get update &&  \
     DEBIAN_FRONTEND=noninteractive \
-    apt install -qy \
+    apt-get --no-install-recommends -y \
     	firefox-esr \
     	gstreamer1.0-alsa \
     	gstreamer1.0-gl \
