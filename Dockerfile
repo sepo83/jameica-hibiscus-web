@@ -40,17 +40,16 @@ RUN \
     	libgstreamer-plugins-bad1.0 \
      	libgstreamer-plugins-base1.0 \
 	pcscd \
-	openjdk-11-jre \
+	openjdk-17-jre \
 	libgtk-3-0 \
 	aqbanking-tools \
 	libaqbanking-data \
 	libaqbanking-dev \
-	libaqbanking35 \
+	libaqbanking44 \
 	libifd-cyberjack6 \
 	libchipcard-data \
 	pcsc-tools \
 	libwebkit2gtk-4.0-37 \
-	libwebkit2gtk-4.0-37-gtk2 \
 	wget \
 	unzip \
 	nano
