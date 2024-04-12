@@ -20,6 +20,7 @@ RUN \
     /kclient/public/icon.png \
     https://github.com/willuhn/hibiscus/blob/master/icons/hibiscus-icon-16x16.png && \
     echo "**** install packages ****" && \
+    mkdir -p /usr/share/man/man1 && \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install --no-install-recommends -y \
@@ -40,7 +41,7 @@ RUN \
     	libgstreamer-plugins-bad1.0 \
      	libgstreamer-plugins-base1.0 \
 	pcscd \
-	openjdk-17-jre \
+	default-jre \
 	libgtk-3-0 \
 	aqbanking-tools \
 	libaqbanking-data \
