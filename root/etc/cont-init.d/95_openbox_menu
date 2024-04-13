@@ -1,4 +1,0 @@
-#!/usr/bin/with-contenv bash
-
-#replace placeholder in openbox menu
-sed -i "s|TO_BE_REPLACED_CMD|/opt/jameica/jameica.sh --file $JAMEICA_DIR|g" /defaults/menu.xml
