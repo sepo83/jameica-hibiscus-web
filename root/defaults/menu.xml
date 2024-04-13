@@ -3,6 +3,6 @@
 <menu id="root-menu" label="MENU">
 <item label="xterm" icon="/usr/share/pixmaps/xterm-color_48x48.xpm"><action name="Execute"><command>/usr/bin/xterm</command></action></item>
 <item label="FireFox" icon="/usr/share/icons/hicolor/48x48/apps/firefox-esr.png"><action name="Execute"><command>/usr/bin/firefox</command></action></item>
-<item label="Hibiscus" icon="/kclient/public/icon.png"><action name="Execute"><command>/opt/jameica/jameica.sh --file $JAMEICA_DIR</command></action></item>
+<item label="Hibiscus" icon="/kclient/public/icon.png"><action name="Execute"><command>importas JAMEICA_DIR JAMEICA_DIR;;/opt/jameica/jameica.sh --file $JAMEICA_DIR</command></action></item>
 </menu>
 </openbox_menu>
