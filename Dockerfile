@@ -1,80 +1,37 @@
-
 FROM ghcr.io/linuxserver/baseimage-selkies:debiantrixie
 
-# set version label
 ARG BUILD_DATE
 ARG VERSION
 LABEL build_version="Linuxserver.io version:- ${VERSION} Build-date:- ${BUILD_DATE}"
-LABEL maintainer="sepo83"
-ENV APPNAME="hibiscus"
 
-ENV JAMEICA_DIR="/config/.jameica"
-ENV INSTALL_RUNDUM_SORGLOS='yes'
+ENV APPNAME="hibiscus" \
+    JAMEICA_DIR="/config/.jameica" \
+    TITLE="Hibiscus"
 
-ENV TITLE=Hibiscus \
-    SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
-
-# install jameica dependencies
-RUN \
-    echo "**** add icon ****" && \
-    curl -o \
-    /kclient/public/icon.png \
-    https://github.com/willuhn/hibiscus/blob/master/icons/hibiscus-icon-16x16.png && \
-    echo "**** install packages ****" && \
-    mkdir -p /usr/share/man/man1 && \
-    apt-get update && \
+# Alles in einem RUN für Cache-Effizienz
+RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install --no-install-recommends -y \
-    	firefox-esr \
-    	gstreamer1.0-alsa \
-    	gstreamer1.0-gl \
-    	gstreamer1.0-gtk3 \
-    	gstreamer1.0-libav \
-    	gstreamer1.0-plugins-bad \
-    	gstreamer1.0-plugins-base \
-    	gstreamer1.0-plugins-good \
-    	gstreamer1.0-plugins-ugly \
-    	gstreamer1.0-pulseaudio \
-    	gstreamer1.0-qt5 \
-    	gstreamer1.0-tools \
-	gstreamer1.0-x \
-    	libgstreamer1.0 \
-    	libgstreamer-plugins-bad1.0 \
-     	libgstreamer-plugins-base1.0 \
-	pcscd \
-	default-jre \
-	libgtk-3-0 \
-	aqbanking-tools \
-	libaqbanking-data \
-	libaqbanking-dev \
-	libaqbanking44 \
-	libifd-cyberjack6 \
-	libchipcard-data \
-	pcsc-tools \
-	libwebkit2gtk-4.0-37 \
-	wget \
-	unzip \
-	nano
+      default-jre libgtk-3-0 libwebkit2gtk-4.0-37 libaqbanking44 && \
+    apt-get autoremove -y && apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /tmp/* && \
+    \
+    curl -o /usr/share/selkies/www/icon.png \
+      https://raw.githubusercontent.com/willuhn/hibiscus/master/icons/hibiscus-icon-16x16.png && \
+    \
+    wget -q -O /tmp/jameica.zip \
+      https://www.willuhn.de/products/jameica/releases/current/jameica/jameica-linux64.zip && \
+    unzip /tmp/jameica.zip -d /opt/ && rm /tmp/jameica.zip && \
+    chmod +x /opt/jameica/jameica.sh && \
+    ln -s /opt/jameica/jameica.sh /usr/local/bin/hibiscus && \
+    \
+    echo '[Desktop Entry]
+Name=Hibiscus
+Exec=hibiscus
+Type=Application
+Icon=/usr/share/selkies/www/icon.png
+Categories=Finance;' > /usr/share/applications/hibiscus.desktop
 
-# clean up
-RUN  rm -rf \
-	/tmp/* \
-	/var/lib/apt/lists/* \
-	/var/tmp/*
-
-#install jameica
-RUN \
-    wget -q -O tmp.zip https://www.willuhn.de/products/jameica/releases/current/jameica/jameica-linux64.zip  && \
-    unzip tmp.zip -d /opt/ && \
-    rm -rf tmp.zip && \
-    chmod -R +x /opt/jameica/jameica.sh
-
-# add local files
-COPY /root /
-
-# ports and volumes
-EXPOSE 3389
+COPY root/ /
+EXPOSE 3001  # Standard Selkies-Port statt 3389
 VOLUME /config
-
-WORKDIR /config
-
