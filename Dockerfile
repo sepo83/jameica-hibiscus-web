@@ -14,7 +14,7 @@ RUN \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install --no-install-recommends -y \
-      openjdk-17-jre-headless \
+      openjdk-21-jre \
       libgtk-3-0 \
       libaqbanking44 && \
     \
