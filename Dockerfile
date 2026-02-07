@@ -23,14 +23,7 @@ RUN apt-get update && \
       https://www.willuhn.de/products/jameica/releases/current/jameica/jameica-linux64.zip && \
     unzip /tmp/jameica.zip -d /opt/ && rm /tmp/jameica.zip && \
     chmod +x /opt/jameica/jameica.sh && \
-    ln -s /opt/jameica/jameica.sh /usr/local/bin/hibiscus && \
-    \
-    echo '[Desktop Entry]
-Name=Hibiscus
-Exec=hibiscus
-Type=Application
-Icon=/usr/share/selkies/www/icon.png
-Categories=Finance;' > /usr/share/applications/hibiscus.desktop
+    ln -s /opt/jameica/jameica.sh /usr/local/bin/hibiscus
 
 COPY root/ /
 EXPOSE 3001  # Standard Selkies-Port statt 3389
