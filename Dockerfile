@@ -14,7 +14,7 @@ RUN \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install --no-install-recommends -y \
-      default-jre libgtk-3-0 libwebkit2gtk-4.0-36 libaqbanking44 && \
+      default-jre libgtk-3-0 libaqbanking44 && \
     \
     echo "**** cleanup ****" && \
     apt-get autoclean && \
