@@ -15,18 +15,20 @@ RUN \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install --no-install-recommends -y \
       default-jre libgtk-3-0 libwebkit2gtk-4.0-37 libaqbanking44 && \
+    \
     echo "**** cleanup ****" && \
     apt-get autoclean && \
     rm -rf \
     /config/.cache \
     /var/lib/apt/lists/* \
     /var/tmp/* \
-    /tmp/*
+    /tmp/* && \
     \
     echo "**** add icon ****" && \
     curl -o /usr/share/selkies/www/icon.png \
       https://raw.githubusercontent.com/willuhn/hibiscus/master/icons/hibiscus-icon-16x16.png && \
     \
+    echo "**** install jameica ****" && \
     wget -q -O /tmp/jameica.zip \
       https://www.willuhn.de/products/jameica/releases/current/jameica/jameica-linux64.zip && \
     unzip /tmp/jameica.zip -d /opt/ && rm /tmp/jameica.zip && \
