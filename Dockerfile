@@ -9,13 +9,21 @@ ENV APPNAME="hibiscus" \
     TITLE="Hibiscus"
 
 # Alles in einem RUN für Cache-Effizienz
-RUN apt-get update && \
+RUN \
+    echo "**** install packages ****" && \
+    apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install --no-install-recommends -y \
       default-jre libgtk-3-0 libwebkit2gtk-4.0-37 libaqbanking44 && \
-    apt-get autoremove -y && apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* && \
+    echo "**** cleanup ****" && \
+    apt-get autoclean && \
+    rm -rf \
+    /config/.cache \
+    /var/lib/apt/lists/* \
+    /var/tmp/* \
+    /tmp/*
     \
+    echo "**** add icon ****" && \
     curl -o /usr/share/selkies/www/icon.png \
       https://raw.githubusercontent.com/willuhn/hibiscus/master/icons/hibiscus-icon-16x16.png && \
     \
