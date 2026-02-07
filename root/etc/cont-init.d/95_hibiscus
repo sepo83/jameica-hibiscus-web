@@ -7,7 +7,7 @@ then
 
         echo "[hibiscus]  ... installing hibiscus. Remark: Hibiscus as well as other jameica plugins should be kept up to date with build-in jameica updater!"
 	mkdir -p $JAMEICA_DIR/plugins
-	wget -q -O $JAMEICA_DIR/tmp.zip  https://www.willuhn.de/products/hibiscus/releases/2.10/hibiscus-2.10.2.zip 
+	wget -q -O $JAMEICA_DIR/tmp.zip  https://www.willuhn.de/products/hibiscus/releases/2.10/hibiscus-2.10.20.zip 
 	unzip $JAMEICA_DIR/tmp.zip -d $JAMEICA_DIR/plugins
 	rm -f $JAMEICA_DIR/tmp.zip
 	chown -R abc:abc $JAMEICA_DIR
