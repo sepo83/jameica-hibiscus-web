@@ -14,7 +14,9 @@ RUN \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install --no-install-recommends -y \
-      openjdk-17-jre libgtk-3-0 libaqbanking44 && \
+      openjdk-17-jre-headless \
+      libgtk-3-0 \
+      libaqbanking44 && \
     \
     echo "**** cleanup ****" && \
     apt-get autoclean && \
