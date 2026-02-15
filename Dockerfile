@@ -22,7 +22,7 @@ RUN \
       libgtk-3-0 \
       libaqbanking44 && \
     \
-    echo "**** Fix Java manpages (workaround for installation error in openjdk) ****" 
+    echo "**** Fix Java manpages (workaround for installation error in openjdk) ****" && \
     mkdir -p /usr/share/man/man1.dpkg-tmp && \
     ln -s /usr/lib/jvm/java-21-openjdk-amd64/man/man1/java.1.gz /usr/share/man/man1/java.1.gz || true && \
     echo "**** cleanup ****" && \
