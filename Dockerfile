@@ -15,13 +15,16 @@ RUN \
     echo "**** install packages ****" && \
     apt update && \
     DEBIAN_FRONTEND=noninteractive \
-    apt upgrade -y && \
     apt install --no-install-recommends -y \
       wget \
+      unzip \
       openjdk-21-jre-headless \
       libgtk-3-0 \
       libaqbanking44 && \
     \
+    echo "**** Fix Java manpages (workaround for installation error in openjdk) ****" 
+    mkdir -p /usr/share/man/man1.dpkg-tmp && \
+    ln -s /usr/lib/jvm/java-21-openjdk-amd64/man/man1/java.1.gz /usr/share/man/man1/java.1.gz || true && \
     echo "**** cleanup ****" && \
     apt-get autoclean && \
     rm -rf \
