@@ -11,10 +11,11 @@ ENV APPNAME="hibiscus" \
 # Alles in einem RUN für Cache-Effizienz
 RUN \
     echo "**** install packages ****" && \
-    apt-get update && \
+    apt update && \
     DEBIAN_FRONTEND=noninteractive \
-    apt-get install --no-install-recommends -y \
-      openjdk-17-jdk \
+    apt upgrade -y && \
+    apt install --no-install-recommends -y \
+      openjdk-21-jdk \
       libgtk-3-0 \
       libaqbanking44 && \
     \
