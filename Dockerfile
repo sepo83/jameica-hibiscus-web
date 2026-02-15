@@ -14,7 +14,7 @@ RUN \
     apt-get update && \
     DEBIAN_FRONTEND=noninteractive \
     apt-get install --no-install-recommends -y \
-      openjdk-21-jre \
+      openjdk-21-jdk \
       libgtk-3-0 \
       libaqbanking44 && \
     \
@@ -38,5 +38,5 @@ RUN \
     ln -s /opt/jameica/jameica.sh /usr/local/bin/hibiscus
 
 COPY root/ /
-EXPOSE 3001  # Standard Selkies-Port statt 3389
+EXPOSE 3001 
 VOLUME /config
