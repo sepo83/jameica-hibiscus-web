@@ -10,6 +10,8 @@ ENV APPNAME="hibiscus" \
 
 # Alles in einem RUN für Cache-Effizienz
 RUN \
+    echo "**** create man dir (workaround for installation error in openjdk) ****" && \
+    mkdir -p /usr/share/man/man1 && \
     echo "**** install packages ****" && \
     apt update && \
     DEBIAN_FRONTEND=noninteractive \
