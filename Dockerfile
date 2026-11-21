@@ -47,7 +47,8 @@ RUN \
     /etc/ssl/private/ssl-cert-snakeoil.key \
     /etc/ssl/certs/ssl-cert-snakeoil.pem \
 	/opt/jameica/lib/h2/migration-h2/disabled \
-	/usr/libexec/docker/cli-plugins/docker-buildx
+	/usr/libexec/docker/cli-plugins/docker-buildx \
+	/usr/libexec/docker/cli-plugins/docker-compose
 
 COPY root/ /
 EXPOSE 3001 
