@@ -25,13 +25,6 @@ RUN \
     echo "**** Fix Java manpages (workaround for installation error in openjdk) ****" && \
     mkdir -p /usr/share/man/man1.dpkg-tmp && \
     ln -s /usr/lib/jvm/java-21-openjdk-amd64/man/man1/java.1.gz /usr/share/man/man1/java.1.gz || true && \
-    echo "**** cleanup ****" && \
-    apt-get autoclean && \
-    rm -rf \
-    /config/.cache \
-    /var/lib/apt/lists/* \
-    /var/tmp/* \
-    /tmp/* && \
     \
     echo "**** add icon ****" && \
     curl -o /usr/share/selkies/www/icon.png \
@@ -42,7 +35,18 @@ RUN \
       https://www.willuhn.de/products/jameica/releases/current/jameica/jameica-linux64.zip && \
     unzip /tmp/jameica.zip -d /opt/ && rm /tmp/jameica.zip && \
     chmod +x /opt/jameica/jameica.sh && \
-    ln -s /opt/jameica/jameica.sh /usr/local/bin/hibiscus
+    ln -s /opt/jameica/jameica.sh /usr/local/bin/hibiscus && \
+    \
+    echo "**** cleanup ****" && \
+    apt-get autoclean && \
+    rm -rf \
+    /config/.cache \
+    /var/lib/apt/lists/* \
+    /var/tmp/* \
+    /tmp/* \
+    /etc/ssl/private/ssl-cert-snakeoil.key \
+    /etc/ssl/certs/ssl-cert-snakeoil.pem \
+	/opt/jameica/lib/h2/migration-h2/disabled
 
 COPY root/ /
 EXPOSE 3001 
