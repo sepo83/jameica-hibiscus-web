@@ -56,12 +56,6 @@ RUN \
 	unzip \
 	nano
 
-# clean up
-RUN  rm -rf \
-	/tmp/* \
-	/var/lib/apt/lists/* \
-	/var/tmp/*
-
 #install jameica
 RUN \
     wget -q -O tmp.zip https://www.willuhn.de/products/jameica/releases/current/jameica/jameica-linux64.zip  && \
@@ -71,6 +65,15 @@ RUN \
 
 # add local files
 COPY /root /
+
+# clean up
+RUN  rm -rf \
+	/tmp/* \
+	/var/lib/apt/lists/* \
+	/var/tmp/* \
+	/etc/ssl/private/ssl-cert-snakeoil.key \
+    /etc/ssl/certs/ssl-cert-snakeoil.pem \
+	/opt/jameica/lib/h2/migration-h2/disabled
 
 # ports and volumes
 EXPOSE 3389
